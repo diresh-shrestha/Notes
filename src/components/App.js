@@ -6,6 +6,8 @@ import CreateArea from './CreateArea';
 
 const App = () => {
   const [note, setNote] = useState([]);
+  const checked = true;
+  const [isEditable, setEditable] = useState(false);
 
   const addNote = (note) => {
     if (note.title === '' && note.content === '') return note;
@@ -32,9 +34,19 @@ const App = () => {
     });
   };
 
+  const editNote = (id) => {
+    setNote((prevNote) => {
+      const currNote = prevNote[id];
+    });
+  };
+
   const notes = note.map((obj, id) => {
     return (
       <Note
+        checked={checked}
+        edit={() => {
+          setEditable(true);
+        }}
         remove={deleteNote}
         id={id}
         title={obj.title}
@@ -47,7 +59,11 @@ const App = () => {
     <div>
       <Header />
       <CreateArea add={addNote} />
+
       {notes}
+
+      {/* {isEditable && <CreateArea />} */}
+
       <Footer />
     </div>
   );
