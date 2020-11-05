@@ -34,12 +34,12 @@ const App = () => {
     });
   };
 
-  const editNote = (id) => {
+  /*   const editNote = (id) => {
     setNote((prevNote) => {
       const currNote = prevNote[id];
     });
   };
-
+ */
   const notes = note.map((obj, id) => {
     return (
       <Note

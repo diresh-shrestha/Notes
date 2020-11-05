@@ -13,7 +13,7 @@ const CreateArea = ({ add }) => {
   const data = ['Take a note...', 'Type something...'];
 
   const CONSTANTS = {
-    DELETING_SPEED: 80,
+    DELETING_SPEED: 60,
     TYPING_SPEED: 150,
   };
 
@@ -115,10 +115,25 @@ const CreateArea = ({ add }) => {
     setExpanded(true);
   };
 
+  const contract = () => {
+    setExpanded(false);
+  };
+
   return (
     <div>
       <ClickAwayListener onClickAway={handleClickAway}>
-        <form className="create-note">
+        <form
+          onMouseEnter={() => {
+            expand();
+            handleClick();
+          }}
+          onMouseLeave={() => {
+            contract();
+            handleClickAway();
+          }}
+          className="create-note"
+          style={{ width: open && '500px' }}
+        >
           <Collapse in={open}>
             <input
               onClick={handleClick}
@@ -138,7 +153,7 @@ const CreateArea = ({ add }) => {
             value={note.content}
             name="content"
             placeholder={state.text}
-            rows={isExpanded && open ? '3' : '1'}
+            rows={isExpanded ? '3' : '1'}
           />
 
           <Zoom in={isExpanded}>
